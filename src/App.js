@@ -36,7 +36,7 @@ function App() {
     console.log(newTotal)
     setTotal(newTotal.toFixed(2))
     let prodIndex = products.findIndex((obj) => {
-      return obj.productName == product.productName
+      return obj.productName === product.productName
     });
     products[prodIndex].isDisabled = true;
     console.log(products)
