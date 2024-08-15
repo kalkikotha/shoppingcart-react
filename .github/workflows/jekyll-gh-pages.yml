@@ -2,8 +2,9 @@ name: Deploy React App to GitHub Pages
 
 on:
   push:
-    branches: ["main"]  # Run on pushes to the main branch
-  workflow_dispatch:     # Allow manual runs
+    branches:
+      - main  # Run on pushes to the main branch
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 permissions:
   contents: read
@@ -22,21 +23,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Use the version you need
+          node-version: '18'  # Specify your Node.js version
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci  # Use npm ci for faster, clean installs
 
-      - name: Build project
+      - name: Build the React app
         run: npm run build
 
-      - name: Upload production-ready files
+      - name: Upload build artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build  # Ensure this path matches your React build output
+          path: './build'  # This is the React build output directory
 
   deploy:
     environment:
